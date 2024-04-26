@@ -1,6 +1,5 @@
 import React from "react";
 import MusicItems from "./MusicItem";
-import Cart from "./Cart";
 
 const Store = () => {
   return (

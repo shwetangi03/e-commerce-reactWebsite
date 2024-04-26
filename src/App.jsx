@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Store from "./pages/Store";
+import ContactUs from "./pages/ContactUs";
 
 import { FaYoutubeSquare } from "react-icons/fa";
 import { FaSpotify } from "react-icons/fa6";
@@ -31,13 +32,21 @@ const App = () => {
         </>
       ),
     },
-
     {
       path: "/home",
       element: (
         <>
           <Navbar />
           <Home />
+        </>
+      ),
+    },
+    {
+      path: "/contactUs",
+      element: (
+        <>
+          <Navbar />
+          <ContactUs />
         </>
       ),
     },

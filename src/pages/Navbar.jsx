@@ -41,7 +41,16 @@ const Navbar = (props) => {
             <li className="p-2">ABOUT</li>
           </NavLink>
 
-          <div className="flex justify-end items-center">
+          <NavLink
+            className={(e) => {
+              return e.isActive ? "bg-slate-700" : "";
+            }}
+            to="/contactUs"
+          >
+            <li className="p-2">CONTACT-US </li>
+          </NavLink>
+
+          <div className="flex justify-end items-center px-16">
             <button
               onClick={toggleCart}
               className="border border-cyan-600 rounded-lg justify-end p-1"
