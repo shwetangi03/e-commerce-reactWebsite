@@ -7,10 +7,12 @@ import About from "./pages/About";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Store from "./pages/Store";
 import ContactUs from "./pages/ContactUs";
+import ProductDetails from "./pages/ProductDetails";
 
 import { FaYoutubeSquare } from "react-icons/fa";
 import { FaSpotify } from "react-icons/fa6";
 import { FaFacebookSquare } from "react-icons/fa";
+import { Routes } from "react-router-dom";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -48,6 +50,15 @@ const App = () => {
           <Navbar />
           <ContactUs />
         </>
+      ),
+    },
+    {
+      path: "/store/productId",
+      element: (
+        <Routes >
+          <Navbar />
+          <ProductDetails />
+        </Routes>
       ),
     },
   ]);

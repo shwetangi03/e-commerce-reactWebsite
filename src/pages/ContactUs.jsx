@@ -88,7 +88,7 @@ const ContactUs = () => {
               onClick={submitHandler}
               className="bg-pink-800 p-2 rounded-lg text-white"
             >
-              Submit Store
+              Submit
             </button>
           </div>
         </div>

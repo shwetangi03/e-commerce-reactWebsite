@@ -50,6 +50,8 @@ const Navbar = (props) => {
             <li className="p-2">CONTACT-US </li>
           </NavLink>
 
+          
+
           <div className="flex justify-end items-center px-16">
             <button
               onClick={toggleCart}

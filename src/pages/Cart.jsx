@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import React, { useContext } from "react";
+
 import CartProduct from "./CartProduct";
 import CartContext from "../store/cart-context";
 
