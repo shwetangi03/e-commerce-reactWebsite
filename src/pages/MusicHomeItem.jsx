@@ -1,11 +1,20 @@
 import React, { useContext } from "react";
 import CartContext from "../store/cart-context";
+import { Link } from "react-router-dom/dist";
 
 const MusicHomeItem = (props) => {
   const cartCTX = useContext(CartContext);
 
   const buttonHandler = () => {
     cartCTX.addTOCartHandler(props);
+    const data = {
+      id: props.id,
+      title: props.title,
+      imageUrl: props.imageUrl,
+      quantity: props.quantity,
+      price: props.price,
+    };
+    cartCTX.addTOCartHandler(data);
   };
 
   return (
@@ -18,15 +27,18 @@ const MusicHomeItem = (props) => {
         src={props.imageUrl}
         alt={props.title}
       />
-      <div className="flex gap-20">
-        <div className="justify-start p-1">${props.price}</div>
-        <button
-          onClick={buttonHandler}
-          className="justify-end mr-12 font-bold bg-cyan-400 text-white rounded px-2 py-1"
-        >
-          ADD TO CART
-        </button>
-      </div>
+      <Link to="/store/p1">
+        <div className="flex gap-20">
+          <div className="justify-start p-1">₹{props.price}</div>
+
+          <button
+            onClick={buttonHandler}
+            className="justify-end mr-12 font-bold bg-cyan-400 text-white rounded px-2 py-1"
+          >
+            ADD TO CART
+          </button>
+        </div>
+      </Link>
     </div>
   );
 };

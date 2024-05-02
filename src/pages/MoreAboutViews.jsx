@@ -3,10 +3,8 @@ import { FaCircleCheck } from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
 const MoreAboutViews = () => {
-  
   return (
     <div>
-      
       <div className="flex p-3">
         <div className="text-xl">Ratings & Reviews </div>
         <div className="bg-green-600 rounded-md px-2">3.9⭐</div>

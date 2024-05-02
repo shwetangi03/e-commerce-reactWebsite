@@ -8,20 +8,20 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Store from "./pages/Store";
 import ContactUs from "./pages/ContactUs";
 import ProductDetails from "./pages/ProductDetails";
+import NotFound from "./pages/NotFound";
 
 import { FaYoutubeSquare } from "react-icons/fa";
 import { FaSpotify } from "react-icons/fa6";
 import { FaFacebookSquare } from "react-icons/fa";
-import { Routes } from "react-router-dom";
+import Login from "./pages/Login";
 
 const App = () => {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/*",
       element: (
         <>
-          <Navbar />
-          <Store />
+          <NotFound />
         </>
       ),
     },
@@ -35,7 +35,7 @@ const App = () => {
       ),
     },
     {
-      path: "/home",
+      path: "/",
       element: (
         <>
           <Navbar />
@@ -53,12 +53,30 @@ const App = () => {
       ),
     },
     {
-      path: "/store/productId",
+      path: "/store",
       element: (
-        <Routes >
+        <>
+          <Navbar />
+          <Store />
+        </>
+      ),
+    },
+    {
+      path: "/store/:productId",
+      element: (
+        <>
           <Navbar />
           <ProductDetails />
-        </Routes>
+        </>
+      ),
+    },
+    {
+      path: "/login",
+      element: (
+        <>
+          <Navbar />
+          <Login />
+        </>
       ),
     },
   ]);

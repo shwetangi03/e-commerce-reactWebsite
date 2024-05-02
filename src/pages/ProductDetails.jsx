@@ -4,7 +4,6 @@ import { FaLocationDot } from "react-icons/fa6";
 import MoreAboutViews from "./MoreAboutViews";
 import { useParams } from "react-router-dom";
 
-
 const ProductDetails = () => {
   const params = useParams();
   console.log(params.productId);
@@ -19,7 +18,7 @@ const ProductDetails = () => {
   };
   return (
     <div>
-      <h1 className="text-2xl p-7">Album 1</h1>
+      <h1 className="text-2xl p-7">{params.productId}Album 1</h1>
       <div className="flex">
         <img
           src="https://prasadyash2411.github.io/ecom-website/img/Album%201.png"

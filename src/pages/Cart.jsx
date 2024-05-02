@@ -13,6 +13,7 @@ const Cart = (props) => {
         title={item.title}
         price={item.price}
         quantity={item.quantity}
+        id={item.id}
       />
     );
   });
@@ -32,7 +33,7 @@ const Cart = (props) => {
       <div>
         <div>{cartListItem}</div>
       </div>
-      <div className="flex justify-end pr-32 font-bold">TOTAL:</div>
+      <div className="flex justify-end pr-32 font-bold">TOTAL:{CTX.total}</div>
       <div className="flex justify-center p-5">
         <button className=" rounded bg-cyan-500 p-2 text-white">
           PURCHASE

@@ -18,7 +18,7 @@ const Navbar = (props) => {
             className={(e) => {
               return e.isActive ? "bg-slate-700 " : "";
             }}
-            to="/home"
+            to="/"
           >
             <li className="p-2 ">HOME </li>
           </NavLink>
@@ -27,7 +27,7 @@ const Navbar = (props) => {
             className={(e) => {
               return e.isActive ? "bg-slate-700" : "";
             }}
-            to="/"
+            to="/store"
           >
             <li className="p-2">STORE </li>
           </NavLink>
@@ -50,8 +50,6 @@ const Navbar = (props) => {
             <li className="p-2">CONTACT-US </li>
           </NavLink>
 
-          
-
           <div className="flex justify-end items-center px-16">
             <button
               onClick={toggleCart}
@@ -61,6 +59,16 @@ const Navbar = (props) => {
             </button>
             {ctx.count}
           </div>
+
+          <NavLink
+            className={(e) => {
+              return e.isActive ? "bg-slate-700" : "";
+            }}
+            to="/login"
+          >
+            <li className="p-2">LOGIN</li>
+          </NavLink>
+
         </ul>
         {isCartOpen && <Cart />}
       </nav>
