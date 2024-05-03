@@ -19,17 +19,17 @@ const MusicHomeItem = (props) => {
 
   return (
     <div>
-      <div className="flex text-2xl font-bold justify-center ">
+      <div className="flex text-2xl font-bold justify-center p-2">
         {props.title}
       </div>
       <img
-        className="h-41 p-5 pl-20 pr-20 py-10"
+        className="h-41 p-1 pr-20 transition-transform transform-gpu hover:scale-105"
         src={props.imageUrl}
         alt={props.title}
       />
       <Link to="/store/p1">
         <div className="flex gap-20">
-          <div className="justify-start p-1">₹{props.price}</div>
+          <div className="justify-start p-2">₹{props.price}</div>
 
           <button
             onClick={buttonHandler}

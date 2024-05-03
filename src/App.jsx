@@ -1,10 +1,13 @@
-import React from "react";
+import React, { Fragment } from "react";
 import "./App.css";
 import Navbar from "./pages/Navbar";
-import CartProvider from "./store/CartProvider";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import Store from "./pages/Store";
 import ContactUs from "./pages/ContactUs";
 import ProductDetails from "./pages/ProductDetails";
@@ -14,11 +17,12 @@ import { FaYoutubeSquare } from "react-icons/fa";
 import { FaSpotify } from "react-icons/fa6";
 import { FaFacebookSquare } from "react-icons/fa";
 import Login from "./pages/Login";
+import CartContext from "./store/cart-context";
 
 const App = () => {
   const router = createBrowserRouter([
     {
-      path: "/*",
+      path: "*",
       element: (
         <>
           <NotFound />
@@ -57,7 +61,9 @@ const App = () => {
       element: (
         <>
           <Navbar />
-          <Store />
+          {CartContext.isLoggedIn && <Store />}
+          {!CartContext.isLoggedIn && <Navigate to="/login" replace={true} />}
+          
         </>
       ),
     },
@@ -67,6 +73,7 @@ const App = () => {
         <>
           <Navbar />
           <ProductDetails />
+          
         </>
       ),
     },
@@ -82,7 +89,7 @@ const App = () => {
   ]);
 
   return (
-    <CartProvider>
+    <Fragment>
       <header>
         <RouterProvider router={router} />
       </header>
@@ -105,7 +112,7 @@ const App = () => {
           </div>
         </a>
       </footer>
-    </CartProvider>
+    </Fragment>
   );
 };
 

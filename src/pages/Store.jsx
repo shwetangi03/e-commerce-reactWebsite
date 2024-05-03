@@ -11,12 +11,12 @@ const Store = () => {
         The Generics
       </section>
 
-      <div className="flex justify-center items-center text-3xl font-bold p-5">
+      <div className="flex justify-center items-center text-3xl font-bold p-3">
         MUSIC
       </div>
       <MusicItems />
 
-      <div className="flex justify-center items-center text-3xl font-bold p-5">
+      <div className="flex justify-center items-center text-3xl font-bold">
         MERCH
       </div>
       <MusicItems />

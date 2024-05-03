@@ -1,67 +1,68 @@
 import React, { useState, useRef, useContext } from "react";
-import classes from "./AuthForm.module.css";
-import { redirect } from "react-router-dom";
+import classes from "./Login.module.css";
+import { useNavigate } from "react-router-dom";
 import CartContext from "../store/cart-context";
 
 const Login = () => {
-    const authCtx =useContext(CartContext) 
-    const emailInputRef = useRef();
-    const passwordInputRef = useRef();
-    const [isLogin, setIsLogin] = useState(true);
-    const [isLoading, setIsLoading] = useState(false);
-  
-    const switchAuthModeHandler = () => {
-      setIsLogin((prevState) => !prevState);
-    };
-  
-    const submitHandler = (event) => {
-      event.preventDefault();
-  
-      const enteredEmail = emailInputRef.current.value;
-      const enteredPassword = passwordInputRef.current.value;
-  
-      setIsLoading(true);
-      let url;
-      if (isLogin) {
-        url =
-          "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDldw49HPbdhUco7XN0uTQjvddxx-4LZ_4";
-      } else {
-        url =
-          "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDldw49HPbdhUco7XN0uTQjvddxx-4LZ_4";
-      }
-      fetch(url, {
-        method: "POST",
-        body: JSON.stringify({
-          email: enteredEmail,
-          password: enteredPassword,
-          returnSecureToken: true,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
+  const authCtx = useContext(CartContext);
+  const history = useNavigate();
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
+  const [isLogin, setIsLogin] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const switchAuthModeHandler = () => {
+    setIsLogin((prevState) => !prevState);
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    const enteredEmail = emailInputRef.current.value;
+    const enteredPassword = passwordInputRef.current.value;
+
+    setIsLoading(true);
+    let url;
+    if (isLogin) {
+      url =
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDldw49HPbdhUco7XN0uTQjvddxx-4LZ_4";
+    } else {
+      url =
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDldw49HPbdhUco7XN0uTQjvddxx-4LZ_4";
+    }
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify({
+        email: enteredEmail,
+        password: enteredPassword,
+        returnSecureToken: true,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        setIsLoading(false);
+        if (res.ok) {
+          return res.json();
+        } else {
+          return res.json().then((data) => {
+            let errorMessage = "Authentication Failed!!";
+            // if (data && data.error && data.error.message) {
+            //   errorMessage = data.error.message;
+            // }
+
+            throw new Error(errorMessage);
+          });
+        }
       })
-        .then((res) => {
-          setIsLoading(false);
-          if (res.ok) {
-            return res.json();
-          } else {
-            return res.json().then((data) => {
-              let errorMessage = "Authentication Failed!!";
-              // if (data && data.error && data.error.message) {
-              //   errorMessage = data.error.message;
-              // }
-  
-              throw new Error(errorMessage);
-            });
-          }
-        })
-        .then((data) => {
-          authCtx.login(data.idToken);
-          redirect("/store");
-        })
-        .catch((err) => {
-          alert(err.message);
-        });
+      .then((data) => {
+        authCtx.login(data.idToken);
+        history("/store");
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
   };
 
   return (

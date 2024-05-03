@@ -1,6 +1,5 @@
 import React from "react";
 import MusicHomeItem from "./MusicHomeItem";
-import { Link } from "react-router-dom/dist";
 
 const MusicItem = () => {
   let productsArr = [
