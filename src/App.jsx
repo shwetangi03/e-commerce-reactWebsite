@@ -1,23 +1,25 @@
 import React, { Fragment } from "react";
 import "./App.css";
-import Navbar from "./pages/Navbar";
-import Home from "./pages/Home";
-import About from "./pages/About";
+const Navbar = React.lazy(() => import("./pages/Navbar"));
+const Home = React.lazy(() => import("./pages/Home"));
+const About = React.lazy(() => import("./pages/About"));
 import {
   createBrowserRouter,
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import Store from "./pages/Store";
-import ContactUs from "./pages/ContactUs";
-import ProductDetails from "./pages/ProductDetails";
-import NotFound from "./pages/NotFound";
+const Store = React.lazy(() => import("./pages/Store"));
+const ContactUs = React.lazy(() => import("./pages/ContactUs"));
+const ProductDetails = React.lazy(() => import("./pages/ProductDetails"));
+const NotFound = React.lazy(() => import("./pages/NotFound"));
+const Login = React.lazy(() => import("./pages/Login"));
 
 import { FaYoutubeSquare } from "react-icons/fa";
 import { FaSpotify } from "react-icons/fa6";
 import { FaFacebookSquare } from "react-icons/fa";
-import Login from "./pages/Login";
+
 import CartContext from "./store/cart-context";
+import { Suspense } from "react";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -61,9 +63,9 @@ const App = () => {
       element: (
         <>
           <Navbar />
-          {CartContext.isLoggedIn && <Store />}
-          {!CartContext.isLoggedIn && <Navigate to="/login" replace={true} />}
-          
+          <Store />
+          {/* {CartContext.isLoggedIn && <Store />}
+          {!CartContext.isLoggedIn && <Navigate to="/login" replace={true} />} */}
         </>
       ),
     },
@@ -73,7 +75,6 @@ const App = () => {
         <>
           <Navbar />
           <ProductDetails />
-          
         </>
       ),
     },
@@ -90,28 +91,36 @@ const App = () => {
 
   return (
     <Fragment>
-      <header>
-        <RouterProvider router={router} />
-      </header>
+      <Suspense
+        fallback={
+          <div>
+            <h3>Loading...</h3>
+          </div>
+        }
+      >
+        <header>
+          <RouterProvider router={router} />
+        </header>
 
-      <footer className="bg-cyan-400 h-20 flex justify-center sticky">
-        <div className="text-white text-5xl px-40 p-2">The Generics</div>
-        <a href="https://www.youtube.com/" target="_blank">
-          <div className="px-9 p-4 text-5xl">
-            <FaYoutubeSquare />
-          </div>
-        </a>
-        <a href="https://www.spotify.com/" target="_blank">
-          <div className="px-9 p-4 text-5xl">
-            <FaSpotify />
-          </div>
-        </a>
-        <a href="https://www.facebook.com/" target="_blank">
-          <div className="px-9 p-4 text-5xl">
-            <FaFacebookSquare />
-          </div>
-        </a>
-      </footer>
+        <footer className="bg-cyan-400 h-20 flex justify-center sticky">
+          <div className="text-white text-5xl px-40 p-2">The Generics</div>
+          <a href="https://www.youtube.com/" target="_blank">
+            <div className="px-9 p-4 text-5xl">
+              <FaYoutubeSquare />
+            </div>
+          </a>
+          <a href="https://www.spotify.com/" target="_blank">
+            <div className="px-9 p-4 text-5xl">
+              <FaSpotify />
+            </div>
+          </a>
+          <a href="https://www.facebook.com/" target="_blank">
+            <div className="px-9 p-4 text-5xl">
+              <FaFacebookSquare />
+            </div>
+          </a>
+        </footer>
+      </Suspense>
     </Fragment>
   );
 };
